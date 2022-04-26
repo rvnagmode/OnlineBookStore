@@ -24,16 +24,25 @@ namespace BookStore.Controllers
         public IActionResult Login(Users users)
         {
           
-            var result = _context.users.Where(u => u.UserId == users.UserId && u.Passwords == users.Passwords).SingleOrDefault();
+            var result = _context.users.Where(u => u.EmailId == users.EmailId && u.Passwords == users.Passwords).SingleOrDefault();
             if(result!=null)
             {
-                return RedirectToAction("Index","Home");
+                if(result.RoleId==1)
+                {
+                    ViewBag.msg1 = "Admin";
+                    return RedirectToAction("Index", "Admin");
+                }
+                else if(result.RoleId==2)
+                {
+                    ViewBag.msg2 = "User";
+                    return RedirectToAction("Index", "Users");
+                }
             }
-            else
-            {
-                ViewBag.popmessage = "<script> alert ( 'login successfull...' )</script>";
+           // else
+           // {
+                //ViewBag.popmessage = "<script> alert ( 'login successfull...' )</script>";
                 return View();
-            }
+           // }
         }
         [HttpGet]
         public IActionResult Register()
