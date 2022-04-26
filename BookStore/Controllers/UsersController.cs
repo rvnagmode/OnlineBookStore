@@ -1,0 +1,59 @@
+﻿using BookStore.Data;
+using BookStore.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+
+namespace BookStore.Controllers
+{
+    public class UsersController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        public UsersController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        [HttpGet]
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(Users users)
+        {
+          
+            var result = _context.users.Where(u => u.UserId == users.UserId && u.Passwords == users.Passwords).SingleOrDefault();
+            if(result!=null)
+            {
+                return RedirectToAction("Index","Home");
+            }
+            else
+            {
+                ViewBag.popmessage = "<script> alert ( 'login successfull...' )</script>";
+                return View();
+            }
+        }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(Users users)
+        {
+            try
+            {
+                users.RoleId = 1;
+                _context.Add(users);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Login","Users");
+        }
+    }
+}
