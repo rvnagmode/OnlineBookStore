@@ -37,5 +37,6 @@ namespace BookStore.Models
         [DataType(DataType.Text)]
         public int RoleId { get; set; }
 
+
     }
 }

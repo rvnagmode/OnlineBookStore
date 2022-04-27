@@ -46,6 +46,14 @@ namespace BookStore.Controllers
         // GET: Admin/Create
         public IActionResult Create()
         {
+            var result1 = _context.cat.ToList();
+            ViewBag.Category = new SelectList(result1, "CategoryId", "CategoryName");
+
+            var result2 = _context.auth.ToList();
+            ViewBag.Author = new SelectList(result2, "AuthorId", "AuthorName");
+
+            var result3 = _context.pub.ToList();
+            ViewBag.Publisher = new SelectList(result3, "PublisherId", "PublisherName");
             return View();
         }
 
@@ -54,7 +62,7 @@ namespace BookStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookName,AuthorId,PublisherId,CategoryId,BookPrice")] Book book)
+        public async Task<IActionResult> Create([Bind("BookName,AuthorId,PublisherId,CategoryId,BookPrice,BookQuantity")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -68,16 +76,23 @@ namespace BookStore.Controllers
         // GET: Admin/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
-            }
+            }*/
 
-            var book = await _context.Book.FindAsync(id);
-            if (book == null)
+            //var book = await _context.Book.FindAsync(id);
+            var book = _context.Book.Where(p => p.BookId == p.BookId).SingleOrDefault();
+            var category = _context.cat.ToList();
+            var author = _context.auth.ToList();
+            var publisher = _context.pub.ToList();
+            /*if (book == null)
             {
                 return NotFound();
-            }
+            }*/
+            ViewBag.cate = new SelectList(category, "CategoryId", "CategoryName");
+            ViewBag.aut = new SelectList(author, "AuthorId", "AuthorName");
+            ViewBag.publ = new SelectList(publisher, "PublisherId", "PublisherName");
             return View(book);
         }
 
@@ -86,7 +101,7 @@ namespace BookStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookName,AuthorId,PublisherId,CategoryId,BookPrice")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,BookName,AuthorId,PublisherId,CategoryId,BookPrice,BookQuantity")] Book book)
         {
             if (id != book.BookId)
             {

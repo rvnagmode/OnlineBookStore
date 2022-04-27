@@ -23,5 +23,15 @@ namespace BookStore.Models
 
         [Required]
         public int BookPrice { get; set; }
+
+        [Required]
+        public int BookQuantity { get; set; }
+
+        [NotMapped]
+        public string ? AuthorName { get; set; }
+        [NotMapped]
+        public string ? PublisherName { get; set; }
+        [NotMapped]
+        public string ? CategoryName { get; set; }
     }
 }

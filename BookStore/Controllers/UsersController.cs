@@ -38,11 +38,7 @@ namespace BookStore.Controllers
                     return RedirectToAction("Index", "Users");
                 }
             }
-           // else
-           // {
-                //ViewBag.popmessage = "<script> alert ( 'login successfull...' )</script>";
                 return View();
-           // }
         }
         [HttpGet]
         public IActionResult Register()
