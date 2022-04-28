@@ -9,6 +9,8 @@ namespace BookStore.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        internal readonly IEnumerable<object> Inventory;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -17,8 +19,10 @@ namespace BookStore.Data
        public DbSet<Users> users { get; set; }
        public DbSet<Book> Book { get; set; }
        
-        public DbSet<Category> cat { get; set; }
+       public DbSet<Category> cat { get; set; }
        public DbSet<Author> auth { get; set; }
        public DbSet<Publisher> pub { get; set; }
+       public DbSet<Orders> ord { get; set; }
+     
     }
 }

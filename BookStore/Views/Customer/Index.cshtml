@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<BookStore.Models.Book>
+
+
+@{ ViewData["Title"] = "Index";
+
+    //Layout = "~\Views\Shared\Customer_Layout.cshtml"; 
+     }
+
+<h1>Index</h1>
+@Html.Raw(ViewBag.OrderPlaced)
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+<div class="row">
+    @foreach (BookStore.Models.Book item in ViewBag.Books)
+    {
+        <div class="col-lg-3 col-md-3 col-xs-12">
+        <div class="card" style="width: 18rem;">
+  <img src="****************" class="card-img-top"  alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Book Name: @Html.DisplayFor(modelItem => item.BookName)</h5>
+    <h5 class="card-title">Book Price: @Html.DisplayFor(modelItem => item.BookPrice)</h5>
+    <p class="card-text"> </p>
+     @Html.ActionLink("Order","Order",new{BookId=item.BookId})
+    
+    <a href="#" class="btn btn-primary"></a>
+  </div>
+</div>
+</div>
+    }
+</div>
+
+
+

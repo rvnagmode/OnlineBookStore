@@ -29,13 +29,13 @@ namespace BookStore.Controllers
             {
                 if(result.RoleId==1)
                 {
-                    ViewBag.msg1 = "Admin";
+                    //ViewBag.msg1 = "Admin";
                     return RedirectToAction("Index", "Admin");
                 }
                 else if(result.RoleId==2)
                 {
-                    ViewBag.msg2 = "User";
-                    return RedirectToAction("Index", "Users");
+                    //ViewBag.msg2 = "User";
+                    return RedirectToAction("Index", "Customer");
                 }
             }
                 return View();

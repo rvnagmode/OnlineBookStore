@@ -1,0 +1,38 @@
+﻿@model BookStore.Models.Orders
+
+
+@{
+    ViewData["Title"] = "Cart";
+    //Layout = "~\Views\Shared\Customer_Layout.cshtml";
+}
+
+<h1>Cart</h1>
+
+<h4></h4>
+@Html.Raw(ViewBag.OrderPlaced)
+
+@using (Html.BeginForm(@Model))
+                {
+                    <p>@Model.BookName</p>
+                <div>
+                     <div class="form-group">
+                        <input type="hidden" name="id" value="@Model.BookId"/>
+                    
+                         <h5 id="scrollspyHeading1">Book Name: @Model.BookName</h5>
+
+                        <h5 id="scrollspyHeading2">Book Price: @Html.DisplayFor(model => model.BookPrice)</h5>
+                         
+                        <h5 id="scrollspyHeading2">Book Quntity: @Html.DisplayFor(model => model.BookQuantity)</h5>
+                        
+                        <h5 id="scrollspyHeading2">Book Total Amount: @Html.DisplayFor(model => model.BookTotalBill)</h5>
+                        
+                       <input type="submit" value="Placed Order" class ="btn btn-warning" />
+                       </div>
+                    </div>              
+                    }
+
+                  
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
