@@ -1,6 +1,8 @@
 ﻿using BookStore.Data;
 using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 
@@ -34,6 +36,7 @@ namespace BookStore.Controllers
                 }
                 else if(result.RoleId==2)
                 {
+                    HttpContext.Session.SetInt32("UserId",result.UserId);
                     //ViewBag.msg2 = "User";
                     return RedirectToAction("Index", "Customer");
                 }

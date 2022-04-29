@@ -48,7 +48,7 @@ namespace BookStore.Controllers
                 ord.BookId = prod.BookId;
                 ord.BookQuantity = qty;
                 ord.BookPrice = prod.BookPrice;
-                ord.BookTotalBill = ord.BookTotalBill * ord.BookTotalBill;
+                ord.BookTotalBill = ord.BookPrice * ord.BookQuantity;
                 // ViewBag.Order=od;
                 HttpContext.Session.SetString("data", JsonConvert.SerializeObject(ord));
 
@@ -84,9 +84,17 @@ namespace BookStore.Controllers
             }
 
         }
+        [HttpGet]
+        public IActionResult ViewOrderDetails()
+        {
+            int res = (int)HttpContext.Session.GetInt32("UserId");
+            var list = context.ord.Where(o => o.UserId == res).ToList();
+            return View(list);
+        }
         [HttpPost]
         public IActionResult Logout()
         {
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
     }

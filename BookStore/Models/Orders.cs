@@ -11,15 +11,17 @@ namespace BookStore.Models
         public int OrderId { get; set; }
         [Required]
         public int BookId { get; set; }
-        [Required]
+        [NotMapped]
         public string BookName { get; set; }
-        [Required]
+        [NotMapped]
         public int BookPrice { get; set; }
-        [Required]
+        [NotMapped]
         public int BookQuantity { get; set; }
         [Required]
         public int BookTotalBill { get; set; }
         [Required]
         public int UserId { get; set; }
+        [Required]
+        public int OrderQuantity { get; set; }
     }
 }
